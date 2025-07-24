@@ -50,7 +50,7 @@ export default function InputDice() {
                         onFocus={() => setWarningSide(true)}
                         onBlur={() => setWarningSide(false)}
                     />
-                    <Text style={[warningSide && styles.warning, errorDice && styles.error]}>{warningSide && "Should be have between 1 and 4 dice" || errorDice && "Must be between 1 and 4"}</Text>
+                    <Text style={[warningDice && styles.warning, errorDice && styles.error]}>{warningDice && "Should be have between 1 and 4 dice" || errorDice && "Must be between 1 and 4"}</Text>
                 </View>
                 <View style={styles.inputText}>
                     <Text style={styles.text}> Choose numbers of sides</Text>
@@ -62,7 +62,7 @@ export default function InputDice() {
                         onFocus={() => setWarningDice(true)}
                         onBlur={() => setWarningDice(false)}
                     />
-                    <Text style={[warningDice && styles.warning, errorSide && styles.error]}>{warningDice && "Should be have between 6 and 20 sides" || errorSide && "Must be between 6 and 20"}</Text>
+                    <Text style={[warningSide && styles.warning, errorSide && styles.error]}>{warningSide && "Should be have between 6 and 20 sides" || errorSide && "Must be between 6 and 20"}</Text>
                 </View>
             </View>
             <Button title="Roll" />
