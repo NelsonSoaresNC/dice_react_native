@@ -47,8 +47,8 @@ export default function InputDice() {
                         keyboardType="numeric"
                         style={styles.input}
                         onChangeText={(text) => validateInput(text, "dice")}
-                        onFocus={() => setWarningSide(true)}
-                        onBlur={() => setWarningSide(false)}
+                        onFocus={() => setWarningDice(true)}
+                        onBlur={() => setWarningDice(false)}
                     />
                     <Text style={[warningDice && styles.warning, errorDice && styles.error]}>{warningDice && "Should be have between 1 and 4 dice" || errorDice && "Must be between 1 and 4"}</Text>
                 </View>
@@ -59,8 +59,8 @@ export default function InputDice() {
                         keyboardType="numeric"
                         style={styles.input}
                         onChangeText={(text) => validateInput(text, "sides")}
-                        onFocus={() => setWarningDice(true)}
-                        onBlur={() => setWarningDice(false)}
+                        onFocus={() => setWarningSide(true)}
+                        onBlur={() => setWarningSide(false)}
                     />
                     <Text style={[warningSide && styles.warning, errorSide && styles.error]}>{warningSide && "Should be have between 6 and 20 sides" || errorSide && "Must be between 6 and 20"}</Text>
                 </View>
