@@ -1,14 +1,20 @@
 import { View, TextInput, Text } from "react-native"
-import { styles } from "./styles"
+import { styles } from "./styles";
 import { useState } from "react"
 import Button from "../button";
 
-export default function InputDice() {
+    interface Props {
+        dice: number;
+        sides: number;
+        setDice: (value: number) => void;
+        setSides: (value: number) => void;
+        onRoll: () => void;
+    }
+export default function InputDice({ dice, sides, setDice, setSides, onRoll }: Props) {
 
-    const [sides, setSides] = useState<string>("6");
 
-    const [dice, setDice] = useState<string>("1");
-
+    const [localDice, setLocalDice] = useState(String(dice));
+    const [localSides, setLocalSides] = useState(String(sides));
     const [errorDice, setErrorDice] = useState<boolean>(false);
     const [errorSide, setErrorSide] = useState<boolean>(false);
     const [warningSide, setWarningSide] = useState<boolean>(false);
@@ -20,21 +26,13 @@ export default function InputDice() {
         const numbers = parseInt(numbersOnly || "0", 10);
 
         if (type == "dice") {
-            setDice(numbersOnly); 
+            setLocalDice(numbersOnly);
             setErrorDice(numbers < 1 || numbers > 4);
         } else if (type == "sides") {
-            setSides(numbersOnly);
+            setLocalSides(numbersOnly);
             setErrorSide(numbers < 6 || numbers > 20);
         }
     };
-
-    function getNumberOfDices(dice: number): number {
-        return 0;
-    }
-
-    function getNumberOfSides(sides: number): number {
-        return 0;
-    }
 
 
     return (
@@ -43,7 +41,7 @@ export default function InputDice() {
                 <View style={styles.inputText}>
                     <Text style={styles.text}> Choose numbers of dice</Text>
                     <TextInput
-                        value={dice}
+                        value={localDice}
                         keyboardType="numeric"
                         style={styles.input}
                         onChangeText={(text) => validateInput(text, "dice")}
@@ -55,7 +53,7 @@ export default function InputDice() {
                 <View style={styles.inputText}>
                     <Text style={styles.text}> Choose numbers of sides</Text>
                     <TextInput
-                        value={sides}
+                        value={localSides}
                         keyboardType="numeric"
                         style={styles.input}
                         onChangeText={(text) => validateInput(text, "sides")}
