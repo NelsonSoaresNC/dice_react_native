@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import InputDice from './src/components/InputsDice';
+import InputDice from './src/components/inputsDice';
 import { useState } from 'react';
 import DiceDisplay from './src/components/diceDisplay';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
 
@@ -17,15 +18,16 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      <View style={styles.container}>
-        <Text style={styles.title}>Roll the dice</Text>
-        <InputDice dice={dice}
-          setDice={setDice}
-          sides={sides}
-          setSides={setSides}
-          onRoll={handleRoll} />
-      </View>
-      <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+      <LinearGradient colors={["#004208ff", "#641818ff"]}style={styles.container}>
+          <Text style={styles.title}>Roll the dice</Text>
+          <InputDice dice={dice}
+            setDice={setDice}
+            sides={sides}
+            setSides={setSides}
+            onRoll={handleRoll} />
+        
+        <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+      </LinearGradient>
     </>
   );
 }
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: "column",
     padding: 60,
-    backgroundColor: "darkgreen"
   },
   title: {
     color: "#ca0000ff",
