@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import InputDice from './src/components/inputsDice';
+import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
 import DiceDisplay from './src/components/diceDisplay';
 
