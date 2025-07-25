@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import InputDice from './src/components/inputsDice';
 import { useState } from 'react';
 import DiceDisplay from './src/components/diceDisplay';
@@ -19,6 +19,11 @@ export default function App() {
     <>
       <StatusBar style='light' />
       <LinearGradient colors={["#004208ff", "#641818ff"]}style={styles.container}>
+        <ImageBackground source={require("./assets/images/dice.jpg")}
+        resizeMode='cover'
+        style={styles.container}
+        imageStyle={styles.backgroundImage}
+        >
           <Text style={styles.title}>Roll the dice</Text>
           <InputDice dice={dice}
             setDice={setDice}
@@ -27,6 +32,7 @@ export default function App() {
             onRoll={handleRoll} />
         
         <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+        </ImageBackground>
       </LinearGradient>
     </>
   );
@@ -38,8 +44,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: "column",
     padding: 60,
+    paddingTop:1,
+    paddingBottom:1
+  },
+  backgroundImage:{
+    opacity: 0.15,
+    
   },
   title: {
+    marginTop: 300, //jogar padding para container/card que ira envolver os inputs e button
     color: "#ca0000ff",
     fontWeight: "bold",
     fontSize: 18

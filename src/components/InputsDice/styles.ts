@@ -20,9 +20,7 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "white"
     },
-    button:{
-        width: 80
-    },
+
     warning:{
         fontSize: 9,
         color: "yellow",
