@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: "center",
     flexDirection: "column",
     padding: 60,
     paddingTop:1,
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
     
   },
   title: {
-    marginTop: 300, //jogar padding para container/card que ira envolver os inputs e button
-    color: "#ca0000ff",
+    //marginTop: 300, //jogar padding para container/card que ira envolver os inputs e button
+    color: "#e00000ff",
     fontWeight: "bold",
     fontSize: 18
   }
