@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import InputDice from './src/components/InputsDice';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import InputDice from './src/components/inputsDice';
 import { useState } from 'react';
 import DiceDisplay from './src/components/diceDisplay';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
 
@@ -17,15 +18,22 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      <View style={styles.container}>
-        <Text style={styles.title}>Roll the dice</Text>
-        <InputDice dice={dice}
-          setDice={setDice}
-          sides={sides}
-          setSides={setSides}
-          onRoll={handleRoll} />
-      </View>
-      <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+      <LinearGradient colors={["#004208ff", "#641818ff"]}style={styles.container}>
+        <ImageBackground source={require("./assets/images/dice.jpg")}
+        resizeMode='cover'
+        style={styles.container}
+        imageStyle={styles.backgroundImage}
+        >
+          <Text style={styles.title}>Roll the dice</Text>
+          <InputDice dice={dice}
+            setDice={setDice}
+            sides={sides}
+            setSides={setSides}
+            onRoll={handleRoll} />
+        
+        <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+        </ImageBackground>
+      </LinearGradient>
     </>
   );
 }
@@ -34,12 +42,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: "center",
     flexDirection: "column",
     padding: 60,
-    backgroundColor: "darkgreen"
+    paddingTop:1,
+    paddingBottom:1
+  },
+  backgroundImage:{
+    opacity: 0.15,
+    
   },
   title: {
-    color: "#ca0000ff",
+    //marginTop: 300, //jogar padding para container/card que ira envolver os inputs e button
+    color: "#e00000ff",
     fontWeight: "bold",
     fontSize: 18
   }
