@@ -1,4 +1,4 @@
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import { styles } from "./styles";
 
@@ -10,16 +10,25 @@ interface DiceSidesInputProps {
 export default function DiceSidesInput({ sides, setSides }: DiceSidesInputProps) {
 
   const [localSides, setLocalSides] = useState(String(sides));
-  const [errorSide, setErrorSide] = useState(false);
+  const [errorSide, setErrorSides] = useState(false);
   const [warningSide, setWarningSide] = useState(false);
+
+  function clearInput() {
+    setSides(6);
+  }
 
   const validateInput = (text: string) => {
     const numbersOnly = text.replace(/[^0-9]/g, "");
     const value = parseInt(numbersOnly || "0", 10);
     setLocalSides(numbersOnly);
-    setErrorSide(value < 6 || value > 20);
+    setErrorSides(value < 6 || value > 20);
     if (value >= 6 && value <= 20) {
       setSides(value);
+    } else {
+
+      clearInput();
+      //Alert.alert("Invalid data", "The number of dices must be have between 6 and 20 sides",
+        //[{ text: "confirm", style: "destructive", onPress: clearInput }]);
     }
   };
 
@@ -30,6 +39,7 @@ export default function DiceSidesInput({ sides, setSides }: DiceSidesInputProps)
         value={localSides}
         keyboardType="numeric"
         style={styles.input}
+        maxLength={2}
         onChangeText={validateInput}
         onFocus={() => setWarningSide(true)}
         onBlur={() => setWarningSide(false)}
