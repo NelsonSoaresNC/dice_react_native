@@ -24,13 +24,14 @@ export default function App() {
         style={styles.container}
         imageStyle={styles.backgroundImage}
         >
+        <View style={styles.brownCard}>
           <Text style={styles.title}>Roll the dice</Text>
           <InputDice dice={dice}
             setDice={setDice}
             sides={sides}
             setSides={setSides}
             onRoll={handleRoll} />
-        
+        </View>
         <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
         </ImageBackground>
       </LinearGradient>
@@ -53,9 +54,17 @@ const styles = StyleSheet.create({
     
   },
   title: {
-    //marginTop: 300, //jogar padding para container/card que ira envolver os inputs e button
     color: "#e00000ff",
     fontWeight: "bold",
     fontSize: 18
+  },
+  brownCard:{
+    borderRadius: 15,
+    padding: 13,
+    alignItems: "center",
+    backgroundColor: "#592101ff",
+    justifyContent: "center",
+    elevation: 8,
+
   }
 });
