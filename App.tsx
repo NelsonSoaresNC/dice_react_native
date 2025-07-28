@@ -34,7 +34,7 @@ export default function App() {
   />
 
   if (showRollScreen) {
-    screen = <RollDiceScreen dice={dice} sides={sides} />
+    screen = <RollDiceScreen dice={dice} sides={sides} onBack={() => setShowRollScreen(false)}/>
   }
 
   return (
