@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
+import Dice from "../../components/Dice";
 
 interface RollDiceScreenProps {
   dice: number;
@@ -27,9 +28,7 @@ export default function RollDiceScreen({ dice, sides }: RollDiceScreenProps) {
       <Text style={styles.title}>Results:</Text>
       <View style={styles.diceContainer}>
         {results.map((value, index) => (
-          <View key={index} style={styles.diceBox}>
-            <Text style={styles.diceText}>{value}</Text>
-          </View>
+          <Dice key={index} value={value}/>
         ))}
       </View>
     </View>
