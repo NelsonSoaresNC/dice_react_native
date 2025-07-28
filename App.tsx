@@ -1,38 +1,56 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import InputDice from './src/components/inputsDice';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
-import DiceDisplay from './src/components/diceDisplay';
 import { LinearGradient } from 'expo-linear-gradient';
+import RollDiceScreen from './src/screens/RollDiceScreen';
+
+function generateRandomBetween(min: number, max: number, exclude: any): number{
+    const rndNum = Math.floor(Math.random() * (max - min)) + min;
+
+    if(rndNum == exclude){
+        return generateRandomBetween(min, max, exclude);
+    }else{
+        return rndNum;
+    }
+}
 
 export default function App() {
 
   const [dice, setDice] = useState<number>(1);
   const [sides, setSides] = useState<number>(6);
-  const [rollTrigger, setRollTrigger] = useState<boolean>(false);
+  const [showRollScreen, setShowRollScreen] = useState<boolean>(false);
 
   const handleRoll = () => {
-    setRollTrigger(prev => !prev);
+    setShowRollScreen(true);
   };
+
+  let screen = <InputDice dice={dice}
+    setDice={setDice}
+    sides={sides}
+    setSides={(value) => setSides(Math.max(6, value))}
+    onRoll={handleRoll}
+  />
+
+  if (showRollScreen) {
+    screen = <RollDiceScreen dice={dice} sides={sides} />
+  }
 
   return (
     <>
       <StatusBar style='light' />
-      <LinearGradient colors={["#004208ff", "#641818ff"]}style={styles.container}>
+      <LinearGradient colors={["#004208ff", "#641818ff"]} style={styles.container}>
         <ImageBackground source={require("./assets/images/dice.jpg")}
-        resizeMode='cover'
-        style={styles.container}
-        imageStyle={styles.backgroundImage}
+          resizeMode='cover'
+          style={styles.container}
+          imageStyle={styles.backgroundImage}
         >
-        <View style={styles.brownCard}>
-          <Text style={styles.title}>Roll the dice</Text>
-          <InputDice dice={dice}
-            setDice={setDice}
-            sides={sides}
-            setSides={setSides}
-            onRoll={handleRoll} />
-        </View>
-        <DiceDisplay dice={dice} sides={sides} rollTrigger={rollTrigger} />
+          <SafeAreaView>
+            <View style={!showRollScreen ? styles.brownCard : undefined}>
+              {!showRollScreen && <Text style={styles.title}>Roll the dice</Text>}
+              {screen}
+            </View>
+          </SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </>
@@ -46,19 +64,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     padding: 60,
-    paddingTop:1,
-    paddingBottom:1
+    paddingTop: 1,
+    paddingBottom: 1
   },
-  backgroundImage:{
+  backgroundImage: {
     opacity: 0.15,
-    
+
   },
   title: {
     color: "#e00000ff",
     fontWeight: "bold",
     fontSize: 18
   },
-  brownCard:{
+  brownCard: {
     borderRadius: 15,
     padding: 13,
     alignItems: "center",
