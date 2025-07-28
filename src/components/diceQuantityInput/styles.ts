@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Colors from "../../../constants/Colors";
 
 export const styles = StyleSheet.create({
         input: {
@@ -19,12 +20,12 @@ export const styles = StyleSheet.create({
     },
         warning:{
         fontSize: 9,
-        color: "yellow",
+        color: Colors.warning,
         fontWeight: "bold"
     },
     error:{
         fontSize: 10,
-        color: "red",
+        color: Colors.error,
         fontWeight: "bold"
     }
 });
