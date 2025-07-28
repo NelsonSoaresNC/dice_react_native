@@ -46,7 +46,7 @@ export default function App() {
           style={styles.container}
           imageStyle={styles.backgroundImage}
         >
-          <SafeAreaView>
+          <SafeAreaView >
             <View style={!showRollScreen ? styles.brownCard : undefined}>
               {!showRollScreen && <Text style={styles.title}>Roll the dice</Text>}
               {screen}
@@ -59,18 +59,17 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+   container: {
+    flex: 1,                      
+    width: "100%",               
+    height: "100%",              
     justifyContent: "center",
-    flexDirection: "column",
-    padding: 60,
-    paddingTop: 1,
-    paddingBottom: 1
+    alignItems: "center",
   },
   backgroundImage: {
     opacity: 0.15,
-
+    width: "100%",
+    height: "100%",            
   },
   title: {
     color: "#e00000ff",
@@ -84,6 +83,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#592101ff",
     justifyContent: "center",
     elevation: 8,
-
   }
 });
