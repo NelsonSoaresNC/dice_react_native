@@ -1,10 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
-import DiceDisplay from './src/screens/RollDiceScreen';
 import { LinearGradient } from 'expo-linear-gradient';
 import RollDiceScreen from './src/screens/RollDiceScreen';
+
+function generateRandomBetween(min: number, max: number, exclude: any): number{
+    const rndNum = Math.floor(Math.random() * (max - min)) + min;
+
+    if(rndNum == exclude){
+        return generateRandomBetween(min, max, exclude);
+    }else{
+        return rndNum;
+    }
+}
 
 export default function App() {
 
@@ -19,7 +28,7 @@ export default function App() {
   let screen = <InputDice dice={dice}
     setDice={setDice}
     sides={sides}
-    setSides={setSides}
+    setSides={(value) => setSides(Math.max(6, value))}
     onRoll={handleRoll}
   />
 
@@ -36,10 +45,12 @@ export default function App() {
           style={styles.container}
           imageStyle={styles.backgroundImage}
         >
-          <View style={!showRollScreen ? styles.brownCard : undefined}>
-            <Text style={styles.title}>Roll the dice</Text>
-          {screen}
-          </View>
+          <SafeAreaView>
+            <View style={!showRollScreen ? styles.brownCard : undefined}>
+              {!showRollScreen && <Text style={styles.title}>Roll the dice</Text>}
+              {screen}
+            </View>
+          </SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </>
