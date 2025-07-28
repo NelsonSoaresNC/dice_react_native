@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { styles} from "./styles";
-import DiceQuantityInput from "../DiceQuantityInput";
-import DiceSidesInput from "../SidesQuantityInput";
+import DiceQuantityInput from "../diceQuantityInput";
+import DiceSidesInput from "../sidesQuantityInput";
 import Button from "../Button";
 
 interface InputsDiceProps {
