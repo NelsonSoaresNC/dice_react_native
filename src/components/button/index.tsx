@@ -2,11 +2,11 @@ import { TouchableOpacityProps, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 
-type Props = TouchableOpacityProps & {
+type ButtonProps = TouchableOpacityProps & {
     title: string
 }
 
-export default function Button({ title, ...rest }: Props) {
+export default function Button({ title, ...rest }: ButtonProps) {
     return (
         <TouchableOpacity
             activeOpacity={0.5}

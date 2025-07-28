@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
 
 export const styles = StyleSheet.create({
- container: {
+  container: {
     marginTop: 30,
     alignItems: "center",
   },
@@ -18,5 +18,14 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
   },
-  
+  total: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  totalText:{
+    fontSize: 28,
+    color: "white",
+    fontWeight: "bold"
+  }
 }); 
