@@ -24,7 +24,7 @@ export default function RollDiceScreen({ dice, sides }: RollDiceScreenProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Resultados:</Text>
+      <Text style={styles.title}>Results:</Text>
       <View style={styles.diceContainer}>
         {results.map((value, index) => (
           <View key={index} style={styles.diceBox}>

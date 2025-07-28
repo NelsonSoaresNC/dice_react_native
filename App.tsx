@@ -4,6 +4,7 @@ import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import RollDiceScreen from './src/screens/RollDiceScreen';
+import Colors from './constants/Colors';
 
 function generateRandomBetween(min: number, max: number, exclude: any): number{
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -39,7 +40,7 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      <LinearGradient colors={["#004208ff", "#641818ff"]} style={styles.container}>
+      <LinearGradient colors={[Colors.gradientColor1,Colors.gradientColor2]} style={styles.container}>
         <ImageBackground source={require("./assets/images/dice.jpg")}
           resizeMode='cover'
           style={styles.container}
