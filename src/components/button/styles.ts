@@ -11,8 +11,11 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 10
     },
-    tilte:{
+    title:{
         fontWeight: "bold",
         color: "#FFFFFF"
+    },
+        buttonDisabled:{
+        backgroundColor: "#ccc",
     }
 });

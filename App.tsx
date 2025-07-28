@@ -4,6 +4,7 @@ import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import RollDiceScreen from './src/screens/RollDiceScreen';
+import Colors from './constants/Colors';
 
 function generateRandomBetween(min: number, max: number, exclude: any): number{
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -33,19 +34,19 @@ export default function App() {
   />
 
   if (showRollScreen) {
-    screen = <RollDiceScreen dice={dice} sides={sides} />
+    screen = <RollDiceScreen dice={dice} sides={sides} onBack={() => setShowRollScreen(false)}/>
   }
 
   return (
     <>
       <StatusBar style='light' />
-      <LinearGradient colors={["#004208ff", "#641818ff"]} style={styles.container}>
+      <LinearGradient colors={[Colors.gradientColor1,Colors.gradientColor2]} style={styles.container}>
         <ImageBackground source={require("./assets/images/dice.jpg")}
           resizeMode='cover'
           style={styles.container}
           imageStyle={styles.backgroundImage}
         >
-          <SafeAreaView>
+          <SafeAreaView >
             <View style={!showRollScreen ? styles.brownCard : undefined}>
               {!showRollScreen && <Text style={styles.title}>Roll the dice</Text>}
               {screen}
@@ -58,18 +59,17 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+   container: {
+    flex: 1,                      
+    width: "100%",               
+    height: "100%",              
     justifyContent: "center",
-    flexDirection: "column",
-    padding: 60,
-    paddingTop: 1,
-    paddingBottom: 1
+    alignItems: "center",
   },
   backgroundImage: {
     opacity: 0.15,
-
+    width: "100%",
+    height: "100%",            
   },
   title: {
     color: "#e00000ff",
@@ -83,6 +83,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#592101ff",
     justifyContent: "center",
     elevation: 8,
-
   }
 });

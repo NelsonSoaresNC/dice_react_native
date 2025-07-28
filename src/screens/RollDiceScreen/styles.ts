@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
+import Colors from "../../../constants/Colors";
 
 export const styles = StyleSheet.create({
- container: {
+  container: {
     marginTop: 30,
     alignItems: "center",
   },
@@ -17,19 +18,27 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
   },
-  diceBox: {
-    backgroundColor: "#8B0000",
-    padding: 15,
-    margin: 5,
-    borderRadius: 8,
-    width: 60,
-    height: 60,
-    justifyContent: "center",
+  total: {
+    width: "100%",
     alignItems: "center",
+    marginTop: 20,
   },
-  diceText: {
+  totalText:{
+    fontSize: 28,
     color: "white",
-    fontSize: 22,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
-});
+  backButton: {
+  position: "absolute",
+  top: -250, 
+  left: 20,
+  zIndex: 1,
+},
+
+backText: {
+  color: "#FFF",
+  fontSize: 20,
+  fontWeight: "bold",
+},
+
+}); 
