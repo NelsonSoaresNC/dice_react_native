@@ -42,7 +42,7 @@ export default function RollDiceScreen({ dice, sides, onBack }: RollDiceScreenPr
   return (
     <View style={styles.container}>
       <Pressable onPress={onBack} style={styles.backButton}>
-        <Text style={styles.backText}>← Voltar</Text>
+        <Text style={styles.backText}>← Back</Text>
       </Pressable>
       <Text style={styles.title}>Results:</Text>
       <View style={styles.diceContainer}>
