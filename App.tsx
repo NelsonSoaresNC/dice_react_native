@@ -1,80 +1,83 @@
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import InputDice from './src/components/InputsDice';
 import { useState } from 'react';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import RollDiceScreen from './src/screens/RollDiceScreen';
+
 import Colors from './constants/Colors';
+import InputDice from './src/components/InputsDice';
+import RollDiceScreen from './src/screens/RollDiceScreen';
+import ScreenWrapper from './src/screens/ScreenWrapper';
 
-function generateRandomBetween(min: number, max: number, exclude: any): number{
-    const rndNum = Math.floor(Math.random() * (max - min)) + min;
+export type RootStackParamList = {
+  Home: undefined;
+  RollDice: { dice: number; sides: number };
+};
 
-    if(rndNum == exclude){
-        return generateRandomBetween(min, max, exclude);
-    }else{
-        return rndNum;
-    }
+const Stack = createNativeStackNavigator<RootStackParamList>();
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+
+function HomeScreen() {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [dice, setDice] = useState<number>(1);
+  const [sides, setSides] = useState<number>(6);
+
+  const handleRoll = () => {
+    navigation.navigate("RollDice", {
+      dice,
+      sides: Math.max(6, sides),
+    });
+  };
+
+  return (
+
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <View style={styles.brownCard}>
+          <Text style={styles.title}>Roll the dice</Text>
+          <InputDice
+            dice={dice}
+            sides={sides}
+            setDice={setDice}
+            setSides={setSides}
+            onRoll={handleRoll}
+          />
+        </View>
+      </View>
+    </ScreenWrapper>
+  );
 }
 
 export default function App() {
-
-  const [dice, setDice] = useState<number>(1);
-  const [sides, setSides] = useState<number>(6);
-  const [showRollScreen, setShowRollScreen] = useState<boolean>(false);
-
-  const handleRoll = () => {
-    setShowRollScreen(true);
-  };
-
-  let screen = <InputDice dice={dice}
-    setDice={setDice}
-    sides={sides}
-    setSides={(value) => setSides(Math.max(6, value))}
-    onRoll={handleRoll}
-  />
-
-  if (showRollScreen) {
-    screen = <RollDiceScreen dice={dice} sides={sides} onBack={() => setShowRollScreen(false)}/>
-  }
-
   return (
     <>
-      <StatusBar style='light' />
-      <LinearGradient colors={[Colors.gradientColor1,Colors.gradientColor2]} style={styles.container}>
-        <ImageBackground source={require("./assets/images/dice.jpg")}
-          resizeMode='cover'
-          style={styles.container}
-          imageStyle={styles.backgroundImage}
-        >
-          <SafeAreaView >
-            <View style={!showRollScreen ? styles.brownCard : undefined}>
-              {!showRollScreen && <Text style={styles.title}>Roll the dice</Text>}
-              {screen}
-            </View>
-          </SafeAreaView>
-        </ImageBackground>
-      </LinearGradient>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{
+          headerStyle: { backgroundColor: Colors.navigation },
+          headerTintColor: "white"
+        }}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="RollDice" component={RollDiceScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-   container: {
-    flex: 1,                      
-    width: "100%",               
-    height: "100%",              
+  container: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
-  },
-  backgroundImage: {
-    opacity: 0.15,
-    width: "100%",
-    height: "100%",            
   },
   title: {
     color: "#e00000ff",
     fontWeight: "bold",
-    fontSize: 18
+    fontSize: 18,
   },
   brownCard: {
     borderRadius: 15,
@@ -83,5 +86,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#592101ff",
     justifyContent: "center",
     elevation: 8,
-  }
+  },
 });

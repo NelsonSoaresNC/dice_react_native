@@ -5,6 +5,7 @@ const Colors = {
     dice: "#8B0000",
     gradientColor1: "#004208ff",
     gradientColor2: "#641818ff",
+    navigation: "#641818ff",
 }
 
 export default Colors;
