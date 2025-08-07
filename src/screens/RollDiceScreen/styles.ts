@@ -19,7 +19,7 @@ container: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: 10,
+    //gap: 10,
   },
   total: {
     width: "100%",
@@ -36,12 +36,6 @@ container: {
   top: -250, 
   left: 20,
   zIndex: 1,
-},
-
-backText: {
-  color: "#FFF",
-  fontSize: 20,
-  fontWeight: "bold",
 },
 
 }); 
