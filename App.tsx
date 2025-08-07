@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator, NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { LinearGradient } from 'expo-linear-gradient';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import Colors from './constants/Colors';
 import InputDice from './src/components/InputsDice';
@@ -30,11 +29,16 @@ function HomeScreen() {
     });
   };
 
+
+  const {width, height} = useWindowDimensions();
+
+  const paddingHorizontal = width < 500 ? 13 : 200;
+
   return (
 
     <ScreenWrapper>
       <View style={styles.container}>
-        <View style={styles.brownCard}>
+        <View style={[styles.brownCard, {paddingHorizontal: paddingHorizontal}]}>
           <Text style={styles.title}>Roll the dice</Text>
           <InputDice
             dice={dice}
@@ -65,6 +69,8 @@ export default function App() {
     </>
   );
 }
+/* const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height; */
 
 const styles = StyleSheet.create({
   container: {

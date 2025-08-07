@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import { useEffect, useState } from "react";
 import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -39,13 +39,18 @@ export default function RollDiceScreen() {
     rollDice();
   }, [dice, sides]);
 
+
+  
+    const {width, height} = useWindowDimensions();
+  
+    const gap = width < 500 ? 0 : 10;
   return (
 
     <ScreenWrapper>
       <View style={styles.container}>
         <Text style={styles.title}>Results:</Text>
 
-        <View style={styles.diceContainer}>
+        <View style={[styles.diceContainer, {gap: gap}]}>
           {results.map((value, index) => (
             <Dice key={index} value={value} />
           ))}
