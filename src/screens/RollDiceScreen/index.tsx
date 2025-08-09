@@ -1,6 +1,6 @@
-import { View, Text, Pressable, useWindowDimensions } from "react-native";
+import { View, Text, useWindowDimensions } from "react-native";
 import { useEffect, useState } from "react";
-import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { NavigationTypes } from "../../types";
 import { styles } from "./styles";
@@ -9,8 +9,7 @@ import Dice from "../../components/Dice";
 import Button from "../../components/Button";
 import MyModal from "../../components/Modal";
 import ScreenWrapper from "../ScreenWrapper";
-
-type RouteProps = RouteProp<NavigationTypes, "RollDice">;
+import { useAppSelector} from "../../hooks/hooks";
 type NavProps = NativeStackNavigationProp<NavigationTypes, "RollDice">;
 
 function generateRandomBetween(min: number, max: number): number {
@@ -19,8 +18,10 @@ function generateRandomBetween(min: number, max: number): number {
 
 export default function RollDiceScreen() {
   const navigation = useNavigation<NavProps>();
-  const route = useRoute<RouteProps>();
-  const { dice, sides } = route.params;
+
+
+  const dice = useAppSelector((state) => state.dice.dice);
+  const sides = useAppSelector((state) => state.dice.sides);
 
   const [results, setResults] = useState<number[]>([]);
   const [totalResult, setTotalResult] = useState<number>(0);
@@ -39,18 +40,15 @@ export default function RollDiceScreen() {
     rollDice();
   }, [dice, sides]);
 
+  const { width } = useWindowDimensions();
+  const gap = width < 500 ? 0 : 10;
 
-  
-    const {width, height} = useWindowDimensions();
-  
-    const gap = width < 500 ? 0 : 10;
   return (
-
     <ScreenWrapper>
       <View style={styles.container}>
         <Text style={styles.title}>Results:</Text>
 
-        <View style={[styles.diceContainer, {gap: gap}]}>
+        <View style={[styles.diceContainer, { gap }]}>
           {results.map((value, index) => (
             <Dice key={index} value={value} />
           ))}
