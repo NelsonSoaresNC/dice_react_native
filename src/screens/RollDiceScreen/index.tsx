@@ -2,7 +2,7 @@ import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import { useEffect, useState } from "react";
 import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../types";
+import { NavigationTypes } from "../../types";
 import { styles } from "./styles";
 
 import Dice from "../../components/Dice";
@@ -10,8 +10,8 @@ import Button from "../../components/Button";
 import MyModal from "../../components/Modal";
 import ScreenWrapper from "../ScreenWrapper";
 
-type RouteProps = RouteProp<RootStackParamList, "RollDice">;
-type NavProps = NativeStackNavigationProp<RootStackParamList, "RollDice">;
+type RouteProps = RouteProp<NavigationTypes, "RollDice">;
+type NavProps = NativeStackNavigationProp<NavigationTypes, "RollDice">;
 
 function generateRandomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
