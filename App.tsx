@@ -9,6 +9,10 @@ import InputDice from './src/components/InputsDice';
 import RollDiceScreen from './src/screens/RollDiceScreen';
 import ScreenWrapper from './src/screens/ScreenWrapper';
 import { NavigationTypes } from './src/types';
+import { useAppDispatch, useAppSelector } from './src/hooks/hooks';
+import { setDice, setSides } from './src/store/redux/diceSlice';
+import { Provider } from 'react-redux';
+import { store } from './src/store/redux/store';
 
 
 
@@ -17,9 +21,10 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<NavigationTypes, 'Home
 
 function HomeScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  
-  const [dice, setDice] = useState<number>(1);
-  const [sides, setSides] = useState<number>(6);
+
+  const dice = useAppSelector((state) => state.dice.dice);
+  const sides = useAppSelector((state) => state.dice.sides);
+  const dispatch = useAppDispatch();
 
   const handleRoll = () => {
     navigation.navigate("RollDice", {
@@ -28,22 +33,19 @@ function HomeScreen() {
     });
   };
 
-
-  const {width, height} = useWindowDimensions();
-
+  const { width } = useWindowDimensions();
   const paddingHorizontal = width < 500 ? 13 : 200;
 
   return (
-
     <ScreenWrapper>
       <View style={styles.container}>
-        <View style={[styles.brownCard, {paddingHorizontal: paddingHorizontal}]}>
+        <View style={[styles.brownCard, { paddingHorizontal }]}>
           <Text style={styles.title}>Roll the dice</Text>
           <InputDice
             dice={dice}
             sides={sides}
-            setDice={setDice}
-            setSides={setSides}
+            setDice={(value) => dispatch(setDice(value))}
+            setSides={(value) => dispatch(setSides(value))}
             onRoll={handleRoll}
           />
         </View>
@@ -54,7 +56,7 @@ function HomeScreen() {
 
 export default function App() {
   return (
-    <>
+    <Provider store={store}>
       <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator screenOptions={{
@@ -65,7 +67,7 @@ export default function App() {
           <Stack.Screen name="RollDice" component={RollDiceScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </Provider>
   );
 }
 /* const deviceWidth = Dimensions.get("window").width;
