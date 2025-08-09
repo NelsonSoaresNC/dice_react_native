@@ -8,17 +8,16 @@ import Colors from './constants/Colors';
 import InputDice from './src/components/InputsDice';
 import RollDiceScreen from './src/screens/RollDiceScreen';
 import ScreenWrapper from './src/screens/ScreenWrapper';
+import { NavigationTypes } from './src/types';
 
-export type RootStackParamList = {
-  Home: undefined;
-  RollDice: { dice: number; sides: number };
-};
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+
+const Stack = createNativeStackNavigator<NavigationTypes>();
+type HomeScreenNavigationProp = NativeStackNavigationProp<NavigationTypes, 'Home'>;
 
 function HomeScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  
   const [dice, setDice] = useState<number>(1);
   const [sides, setSides] = useState<number>(6);
 
