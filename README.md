@@ -13,14 +13,14 @@ To run this app, you need to install the dependencies with ```npm i``` or ```npm
 
  ## Technologies used
  - Redux
- - React Mavigation
+ - React Navigation
  - Hooks
  - Flexbox
  - Responsivity
 
  # Below images and text about the project
 
-## Start screen
+## Initial screen
 ![alt text](./assets/readimgs/image.png)
 
 ### When the input is focused, it sends an alert about the correct values to be entered.
